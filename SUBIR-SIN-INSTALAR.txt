@@ -1,12 +1,1 @@
-COM610 — SUBIR EL AVANCE A GITHUB SIN INSTALAR PROGRAMAS EN WINDOWS
-
-1. Abre https://github.com/new e inicia sesion.
-2. Nombre del repositorio: com610-gcp-libros. Visibilidad: PUBLIC. Crea el repositorio sin README inicial.
-3. Extrae el ZIP en Windows, abre la carpeta extraida. Selecciona TODO su contenido (Ctrl+A, incluyendo .github) y arrastralo a la pantalla «uploading an existing file» del repositorio. Evita subir el ZIP como unico archivo.
-4. Pulsa «Commit changes» / «Commit files». Comprueba que README.md y .github/workflows/ci.yml se ven en la raiz.
-5. Abre la pestana Actions. Espera a que termine CI y revisa resultados de test y publish en CD (deploy sale omitido hasta configurar GCP).
-6. Copia la URL PUBLICA de tu repositorio y entregala en eCampus.
-
-ESTO ES UNA ENTREGA PARCIAL: NO HAY CLOUD SQL, VM NI API PUBLICA y no se garantiza calificacion. El enunciado original pide AWS, asi que consulta con el docente si admite GCP.
-
-ADVERTENCIA: package-lock.json es requisito expreso y aun falta. Los workflows lo generan provisionalmente en GitHub solo para ejecutar pruebas, no lo guardan en el repositorio. Genera y sube ese archivo con npm install cuando puedas.
+COM610 — Se realizo todo los pasos correctamento solo faltaria hacer la prueba con AWS pero se me acabaron los creditos
