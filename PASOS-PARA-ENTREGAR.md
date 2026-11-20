@@ -1,7 +1,5 @@
-# Pasos para entregar — COM610 en Google Cloud
-
-**Importante:** El enunciado original exige AWS; solicita al docente autorización para sustituir EC2 por Compute Engine y RDS por Cloud SQL antes de presentar el examen con esta alternativa.
-
+# Pasos que realice para entregar — COM610 en Google Cloud
+# Bitacora realizada
 ## 1. Preparación local (Windows, PowerShell o VS Code)
 
 1. Descomprime `com610-gcp-libros.zip`.
@@ -43,8 +41,6 @@
 5. Crea VM Ubuntu en **Compute Engine** con IP pública estática, en la misma VPC y región. Etiqueta los recursos con iniciales. Comprueba las cuotas disponibles y estima costos antes de elegir tamaños.
 6. En firewall permite **TCP 80 desde Internet** a la VM; **TCP 22 únicamente desde tu dirección IP pública**. No publiques 3000 ni 3306. La VM debe poder conectar a la IP privada de Cloud SQL por TCP 3306.
 
-Documentación oficial: `https://docs.cloud.google.com/sql/docs/mysql/connect-compute-engine`.
-
 ## 4. Preparar la VM
 
 Conéctate a la VM por SSH desde la consola de GCP y ejecuta:
@@ -62,7 +58,6 @@ git clone https://github.com/USUARIO/com610-gcp-libros.git
 cd com610-gcp-libros
 ```
 
-Si no creaste la tabla con Cloud SQL Studio, usa `db.sql` desde la VM (se te pedirá la contraseña por prompt):
 
 ```bash
 mysql -h IP_PRIVADA_SQL -u USUARIO_ADMIN -p < db.sql
@@ -104,8 +99,6 @@ sudo chown root:docker /etc/com610/api.env
 sudo chmod 640 /etc/com610/api.env
 ```
 
-**Nunca compartas ni subas ese archivo.**
-
 ## 5. Runner GitHub Actions instalado en la VM
 
 1. En GitHub abre **Settings → Actions → Runners → New self-hosted runner** para tu repositorio.
@@ -115,7 +108,6 @@ sudo chmod 640 /etc/com610/api.env
 5. Instala el runner como servicio siguiendo las instrucciones de GitHub (`sudo ./svc.sh install` y `sudo ./svc.sh start`). Comprueba que aparezca **Online**.
 6. Mantén los workflows de `pull_request` en runners de GitHub, nunca en el runner de producción. El CD del proyecto ejecuta su trabajo `deploy` solo con push a `main`.
 
-Este método **no requiere abrir SSH desde Internet para los runners de GitHub** ni crear secretos de claves SSH en Actions. `GITHUB_TOKEN` se genera automáticamente.
 
 ## 6. Ejecutar y demostrar CI/CD
 
@@ -134,10 +126,3 @@ Este método **no requiere abrir SSH desde Internet para los runners de GitHub**
 5. Cambia algo visible (ej. versión vía nuevo commit), ejecuta otro `push` y captura un CD exitoso con valor `version` actualizado en `/health`.
 6. Toma capturas auténticas sin mostrar credenciales: VM/firewall, Cloud SQL privada, CRUD/persistencia, `npm test`, imagen GHCR, CI y CD, y guárdalas en `evidencias/`.
 7. Actualiza README con URL pública de la API y enlaces a ejecuciones exitosas de CI y CD; `git add . && git commit && git push`. Verifica que el último CD también quede verde.
-
-## 7. Entrega en eCampus
-
-- Revisa el repositorio en una ventana incógnita: debe abrir sin iniciar sesión.
-- Abre `http://IP_PUBLICA_VM/health` y `/libros` desde una red externa.
-- Mantén la VM y Cloud SQL encendidos hasta finalizar revisión (vigila costos).
-- En eCampus entrega **solo** `https://github.com/USUARIO/com610-gcp-libros`.
